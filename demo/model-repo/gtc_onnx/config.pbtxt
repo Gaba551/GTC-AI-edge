@@ -1,0 +1,40 @@
+name: "gtc_onnx"
+platform: "onnxruntime_onnx"
+backend: "onnxruntime"
+max_batch_size: 0
+input [
+  {
+    name: "input"
+    data_type: TYPE_FP32
+    dims: [-1,3, 640, 640 ]
+  }
+]
+output [
+  {
+    name: "output"
+    data_type: TYPE_FP32
+    dims: [-1,25200,8]
+	label_filename: "labels.txt"
+  },
+  {
+    name: "1354"
+    data_type: TYPE_FP32
+    dims: [ 1,3,40,40,8 ]
+  },
+  {
+    name: "1702"
+    data_type: TYPE_FP32
+    dims: [ 1,3,20,20,8 ]
+  },
+  {
+    name: "1006"
+    data_type: TYPE_FP32
+    dims: [ 1,3,80,80,8 ]
+  }
+]
+# Specify GPU instance.
+instance_group {
+  kind: KIND_CPU
+  count: 1
+  #gpus: 0
+}
